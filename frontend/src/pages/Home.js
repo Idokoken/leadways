@@ -1,0 +1,158 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { Tablet, Desktop } from "../Responsive";
+import { Data } from "../config/data";
+
+const Wrapper = styled.div`
+  min-height: 50vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+
+  h1 {
+    margin: 30px;
+    font-family: "Spectral SC", serif;
+  }
+
+  h2 {
+    font-family: "Lora", serif;
+    font-style: normal;
+    font-weight: 700;
+    /* margin-top: 10px; */
+    margin-left: 30px;
+    color: var(--primary-color);
+  }
+  .featured {
+    padding: 20px;
+    margin-bottom: 0;
+  }
+  .featured .img-container {
+    width: 100%;
+    height: 40vh;
+    background-color: grey;
+    margin: auto;
+    border-radius: 10px;
+    ${Tablet({ width: "70%", height: "50vh" })}/* ${Desktop({
+      width: "70%",
+    })} */
+  }
+  .featured img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .featured h3 {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 30px;
+    margin: 20px 0;
+    font-weight: 700;
+    text-align: center;
+  }
+  .featured p {
+    text-align: center;
+  }
+  .featured .post {
+    /* margin-bottom: 30px; */
+    padding-bottom: 20px;
+    /* ${Tablet({ paddingBottom: "50px" })} */
+  }
+  .featured .post::hover {
+    opacity: 0.5;
+  }
+  .others {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 100%;
+    ${Tablet({ gridTemplateColumns: "50% 50%" })};
+    ${Desktop({ gridTemplateColumns: "40% 40%" })}
+  }
+  .others .post {
+    margin-bottom: 30px;
+    box-shadow: 0 5px 5px #888888;
+    padding: 20px;
+    ${Tablet({ marginRight: "40px" })}
+  }
+  .others h4 {
+    font-family: "Noto Serif";
+    font-style: italic;
+    font-weight: 700;
+  }
+  .others span {
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+  .more {
+    margin: 30px;
+    margin-top: 20px;
+  }
+  .more a {
+    padding: 10px 15px;
+    background: var(--primary-color);
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 30px;
+    text-decoration: none;
+  }
+`;
+
+const Home = () => {
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  const featuredItems = Data.map((item, i) => (
+    <div className="post" key={item._id}>
+      <Link
+        style={{ textDecoration: "none", color: "inherit" }}
+        to={`/post/${item._id}`}
+      >
+        <div className="img-container">
+          <img src={item.cover} alt="product cover" width="100" height="100" />
+        </div>
+        <div className="container">
+          <h3>{item.title}</h3>
+          <p>{item.description.slice(0, 200)}</p>
+        </div>
+      </Link>
+    </div>
+  ));
+
+  const otherItems = Data.map((item, i) => (
+    <div className="post" key={item._id}>
+      <Link
+        style={{ textDecoration: "none", color: "inherit" }}
+        to={`/post/${item._id}`}
+      >
+        <h4>{item.title}</h4>
+
+        <div className="desc">
+          <p>{item.description.slice(0, 100)}</p>
+          <span>more</span>
+        </div>
+      </Link>
+    </div>
+  ));
+  return (
+    <>
+      <Navbar />
+      <Wrapper>
+        <h1>
+          Welcome to Leadways blog, your number one destination for latest news
+        </h1>
+        <h2 className="">Trending news</h2>
+
+        <div className="featured">{featuredItems}</div>
+        <h2>Latest news</h2>
+        <div className="others">{otherItems}</div>
+        <div className="more">
+          <Link to="/posts">More News</Link>
+        </div>
+      </Wrapper>
+      <Footer />
+    </>
+  );
+};
+
+export default Home;
