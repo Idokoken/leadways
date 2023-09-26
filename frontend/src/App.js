@@ -1,33 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import SinglePost from "./pages/SinglePost";
 import PostPage from "./pages/PostPage";
-import Header from "./components/Header";
-import Profile from "./pages/Profile";
-import Logout from "./pages/Logout";
-import jwtDecode from "jwt-decode";
-import setAuthToken from "./setAuthToken";
-import PrivateRoute from "./pages/PrivateRoute";
+import AdminPage from "./pages/admin/AdminPage";
+import AddPostPage from "./pages/admin/AddPostPage";
+import EditPostPage from "./pages/admin/EditPostPage";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
-  let logUser;
-  if (localStorage.token) {
-    const jwt = localStorage.getItem("token");
-    setAuthToken(jwt);
-    logUser = jwtDecode(jwt);
-    console.log(logUser);
-  }
-  const [user, setUser] = useState(logUser);
-
   return (
     <Router>
-      <Header user={user} />
-
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
@@ -35,14 +22,11 @@ function App() {
         <Route path="/post/:id" element={<SinglePost />} />
         <Route path="/posts" element={<PostPage />} />
 
-        <Route path="/login" element={<LoginPage user={user} />} />
-        <Route path="/register" element={<RegisterPage />} />
-
-        <Route element={<PrivateRoute user={user} />}>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/logout" element={<Logout />} />
-        </Route>
+        <Route path="/admin/okoro" element={<AdminPage />} />
+        <Route path="/addpost" element={<AddPostPage />} />
+        <Route path="/editpost/:id" element={<EditPostPage />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

@@ -51,7 +51,7 @@ const Wrapper = styled.div`
 function Header({ user }) {
   return (
     <Wrapper>
-      {user && user.isAdmin && (
+      {/* {user && user.isAdmin && (
         <>
           <div>
             <Link to="/admin">Admin</Link>
@@ -62,7 +62,8 @@ function Header({ user }) {
             </Link>
           </div>
         </>
-      )}
+      )} */}
+
       {user && (
         <>
           <div>
@@ -79,6 +80,9 @@ function Header({ user }) {
       )}
       {!user && (
         <>
+          <div>
+            <Link to="/admin">Admin</Link>
+          </div>
           <div>
             <Link to="/register">Register</Link>
           </div>

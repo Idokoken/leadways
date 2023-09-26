@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import axios from "axios";
 import { Tablet, Desktop } from "../Responsive";
-import { Data } from "../config/data";
 
 const Wrapper = styled.div`
   min-height: 50vh;
@@ -100,9 +98,35 @@ const Wrapper = styled.div`
 `;
 
 const Home = () => {
+  const [posts, setPosts] = useState([]);
+  const [featuredPost, setFeaturedPost] = useState([]);
+
+  const getLatestPosts = async () => {
+    try {
+      const resp = await axios.get(`/post/latest`);
+      setPosts(resp.data);
+      console.log(resp.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getfeaturedPosts = async () => {
+    try {
+      const resp = await axios.get(`/post/featured`);
+      setFeaturedPost(resp.data);
+      console.log(resp.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getfeaturedPosts();
+    getLatestPosts();
+  }, []);
   // const location = useLocation();
   // const navigate = useNavigate();
-  const featuredItems = Data.map((item, i) => (
+  const featuredItems = featuredPost.map((item, i) => (
     <div className="post" key={item._id}>
       <Link
         style={{ textDecoration: "none", color: "inherit" }}
@@ -119,7 +143,7 @@ const Home = () => {
     </div>
   ));
 
-  const otherItems = Data.map((item, i) => (
+  const otherItems = posts.map((item, i) => (
     <div className="post" key={item._id}>
       <Link
         style={{ textDecoration: "none", color: "inherit" }}
@@ -135,23 +159,19 @@ const Home = () => {
     </div>
   ));
   return (
-    <>
-      <Navbar />
-      <Wrapper>
-        <h1>
-          Welcome to Leadways blog, your number one destination for latest news
-        </h1>
-        <h2 className="">Trending news</h2>
+    <Wrapper>
+      <h1>
+        Welcome to Leadways blog, your number one destination for latest news
+      </h1>
+      <h2 className="">Trending news</h2>
 
-        <div className="featured">{featuredItems}</div>
-        <h2>Latest news</h2>
-        <div className="others">{otherItems}</div>
-        <div className="more">
-          <Link to="/posts">More News</Link>
-        </div>
-      </Wrapper>
-      <Footer />
-    </>
+      <div className="featured">{featuredItems}</div>
+      <h2>Latest news</h2>
+      <div className="others">{otherItems}</div>
+      <div className="more">
+        <Link to="/posts">More News</Link>
+      </div>
+    </Wrapper>
   );
 };
 

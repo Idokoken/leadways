@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 import { Tablet, Desktop } from "../Responsive";
-import { Data } from "../config/data";
 
 const Wrapper = styled.div`
   margin: 0;
@@ -52,24 +52,47 @@ const Wrapper = styled.div`
 `;
 
 function RelatedPost({ id }) {
-  const items = Data.filter((p, i) => p._id != id).map((item, i) => (
-    <div className="related-post" key={item._id}>
-      <Link
-        style={{ textDecoration: "none", color: "inherit" }}
-        to={`/post/${item._id}`}
-      >
-        <div className="img-container">
-          <img src={item.cover} alt="product cover" width="100" height="100" />
-        </div>
-        <h4>{item.title}</h4>
+  const [relatedPosts, setRelatedPosts] = useState([]);
 
-        <div className="desc">
-          <p>{item.description.slice(0, 100)}</p>
-          <span>more</span>
-        </div>
-      </Link>
-    </div>
-  ));
+  const getPosts = async () => {
+    try {
+      const resp = await axios.get(`/post/related`);
+      setRelatedPosts(resp.data);
+      console.log(resp.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  const items = relatedPosts
+    .filter((p, i) => p._id != id)
+    .map((item, i) => (
+      <div className="related-post" key={item._id}>
+        <Link
+          style={{ textDecoration: "none", color: "inherit" }}
+          to={`/post/${item._id}`}
+        >
+          <div className="img-container">
+            <img
+              src={item.cover}
+              alt="product cover"
+              width="100"
+              height="100"
+            />
+          </div>
+          <h4>{item.title}</h4>
+
+          <div className="desc">
+            <p>{item.description.slice(0, 100)}</p>
+            <span>more</span>
+          </div>
+        </Link>
+      </div>
+    ));
   return (
     <Wrapper>
       <div className="relatedPost-container">{items}</div>

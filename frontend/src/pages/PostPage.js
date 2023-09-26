@@ -1,7 +1,5 @@
 import React from "react";
 import Posts from "../components/Posts";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { styled } from "styled-components";
 
 const Wrapper = styled.div`
@@ -21,14 +19,10 @@ const Wrapper = styled.div`
 
 function PostPage() {
   return (
-    <>
-      <Navbar />
-      <Wrapper>
-        <h2>Posts from Leadways blog</h2>
-        <Posts />
-      </Wrapper>
-      <Footer />
-    </>
+    <Wrapper>
+      <h2>Posts from Leadways blog</h2>
+      <Posts />
+    </Wrapper>
   );
 }
 

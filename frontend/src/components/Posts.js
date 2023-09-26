@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import { Tablet, Desktop } from "../Responsive";
-import { Data } from "../config/data";
 
 const Wrapper = styled.div`
   margin: 0;
@@ -52,26 +52,23 @@ const Wrapper = styled.div`
 `;
 
 function Posts() {
-  // const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-  // const getPosts = async () => {
-  //   try {
-  //     const resp = await fetch(Data);
-  //     const data = await resp.json();
-  //     setPosts(data);
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getPosts = async () => {
+    try {
+      const resp = await axios.get(`/post`);
+      setPosts(resp.data);
+      console.log(resp.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // useEffect(() => {
-  //   getPosts();
-  // }, []);
+  useEffect(() => {
+    getPosts();
+  }, []);
 
-  console.log(Data);
-
-  const items = Data.map((item, i) => (
+  const items = posts.map((item, i) => (
     <div className="post" key={item._id}>
       <Link
         style={{ textDecoration: "none", color: "inherit" }}

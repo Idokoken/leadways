@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import NewsLetter from "../components/NewsLetter";
 import { Tablet } from "../Responsive";
 
@@ -53,75 +51,70 @@ class About extends Component {
       }
     `;
     return (
-      <>
-        <Navbar />
-        <Wrapper>
-          <div className="about container py-3 py-3">
-            <h3 className="my-3">What Leadways Stands For</h3>
-            <p>
-              Leadways blog, registered on September 1, 2023 (RC No: 509632),
-              commenced online publication on Sptember 5, 2023.
-            </p>
-            <p>
-              The Leadways is an independent online news blog,for the purpose of
-              presenting balanced coverage of events, and of promoting the best
-              interests of the People. It owes allegiance to no political party,
-              ethnic community, religious, Country or other interest group. Its
-              primary commitment is to the integrity and truth, and beyond that
-              to the unity of world. Leadways blog is a liberal online blog,
-              committed to the best traditions and ideals of democracy. It
-              believes that it is the responsibility of the state not only to
-              protect and defend the citizen, but also to create the conditions,
-              political, social, economic and cultural, in which all citizens
-              may achieve their highest potential as human beings. It is
-              committed to the principle of individual freedom, but believes
-              that all citizens have duties as well as rights. . Leadways will
-              at all times uphold the need for justice, probity in public life,
-              equal access to the nation’s resources, and equal protection for
-              all citizens.
-            </p>
-            <h3>Vision</h3>
-            <p>
-              To be among Nigeria’s first truly Independent national quality and
-              news website.
-            </p>
-            <h3>Mission</h3>
-            <p>
-              To produce quality, vibrant and viable news that wills inform and
-              form the nation’s present and aspiring political, business,
-              economic and cultural leadership; challenge and inspire the
-              nation’s journalists to advance and defend the public good; and
-              deliver superior value to all stakeholders.
-            </p>
-            <h3>Editorial Policy</h3>
-            <p>
-              Our Editorial Policy, as set out by the Board of Directors, was
-              founded on the following principle: We shall be independent on all
-              matters, but shall never be neutral on any matter, especially
-              those concerning the well-being of the Nigerian people.
-            </p>
+      <Wrapper>
+        <div className="about container py-3 py-3">
+          <h3 className="my-3">What Leadways Stands For</h3>
+          <p>
+            Leadways blog, registered on September 1, 2023 (RC No: 509632),
+            commenced online publication on Sptember 5, 2023.
+          </p>
+          <p>
+            The Leadways is an independent online news blog,for the purpose of
+            presenting balanced coverage of events, and of promoting the best
+            interests of the People. It owes allegiance to no political party,
+            ethnic community, religious, Country or other interest group. Its
+            primary commitment is to the integrity and truth, and beyond that to
+            the unity of world. Leadways blog is a liberal online blog,
+            committed to the best traditions and ideals of democracy. It
+            believes that it is the responsibility of the state not only to
+            protect and defend the citizen, but also to create the conditions,
+            political, social, economic and cultural, in which all citizens may
+            achieve their highest potential as human beings. It is committed to
+            the principle of individual freedom, but believes that all citizens
+            have duties as well as rights. . Leadways will at all times uphold
+            the need for justice, probity in public life, equal access to the
+            nation’s resources, and equal protection for all citizens.
+          </p>
+          <h3>Vision</h3>
+          <p>
+            To be among Nigeria’s first truly Independent national quality and
+            news website.
+          </p>
+          <h3>Mission</h3>
+          <p>
+            To produce quality, vibrant and viable news that wills inform and
+            form the nation’s present and aspiring political, business, economic
+            and cultural leadership; challenge and inspire the nation’s
+            journalists to advance and defend the public good; and deliver
+            superior value to all stakeholders.
+          </p>
+          <h3>Editorial Policy</h3>
+          <p>
+            Our Editorial Policy, as set out by the Board of Directors, was
+            founded on the following principle: We shall be independent on all
+            matters, but shall never be neutral on any matter, especially those
+            concerning the well-being of the Nigerian people.
+          </p>
 
-            <h3>Editorial Team</h3>
-            <p>
-              Nduka Idoko, Comrade Kerian Onah, Hon. Meletus Ona, Henry Udom,
-              Musa-Ibrahim juwoo, Jonathan Ishaku.
-            </p>
+          <h3>Editorial Team</h3>
+          <p>
+            Nduka Idoko, Comrade Kerian Onah, Hon. Meletus Ona, Henry Udom,
+            Musa-Ibrahim juwoo, Jonathan Ishaku.
+          </p>
 
-            <div className="categories">
-              <h3>Our News Categories includes</h3>
-              <p>Featured</p>
-              <p>Politics</p>
-              <p>World</p>
-              <p>Sport</p>
-              <p>Technology</p>
-              <p>Art</p>
-              <p>Business</p>
-            </div>
+          <div className="categories">
+            <h3>Our News Categories includes</h3>
+            <p>Featured</p>
+            <p>Politics</p>
+            <p>World</p>
+            <p>Sport</p>
+            <p>Technology</p>
+            <p>Art</p>
+            <p>Business</p>
           </div>
-          <NewsLetter />
-        </Wrapper>
-        <Footer />
-      </>
+        </div>
+        <NewsLetter />
+      </Wrapper>
     );
   }
 }

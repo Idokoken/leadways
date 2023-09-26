@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 import { Tablet } from "../Responsive";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { Data } from "../config/data";
 import RelatedPost from "../components/RelatedPost";
 
 const Wrapper = styled.div`
@@ -85,63 +83,58 @@ const Wrapper = styled.div`
 `;
 
 function SinglePost() {
-  // const [post, setPost] = useState({});
+  const [post, setPost] = useState({});
   const { id } = useParams();
 
-  // const getPost = async () => {
-  //   try {
-  //     const resp = await fetch(`/post/${id}`);
-  //     const data = await resp.json();
-  //     setPost(data);
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getPost = async () => {
+    try {
+      const resp = await axios.get(`/post/${id}`);
+      setPost(resp.data);
+      console.log(resp.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // useEffect(() => {
-  //   getPost();
-  //}, [id]);
+  useEffect(() => {
+    getPost();
+  }, [id]);
 
-  const post = Data.find((item) => item._id == id);
-  console.log(post);
+  // const post = Data.find((item) => item._id == id);
+  // console.log(post);
 
   return (
-    <>
-      <Navbar />
-      <Wrapper>
-        <div className="post">
-          <h2>{post.title}</h2>
-          <h5>September 20, 2023</h5>
-          <div className="img-container">
-            <img src={post.cover} alt="post cover" />
-          </div>
-          <div className="content">
-            <p className="desc">{post.description}</p>
-            <div className="social my-4">
-              <h4 className="mb-3">Share on</h4>
-              <Link to="https://twitter.com">
-                <img src="/images/twitter.png" alt="twitter" />
-              </Link>
-              <Link to="https://facebook.com">
-                <img src="/images/facebook.png" alt="facebook" />
-              </Link>
-              <Link to="https://linkedin.com">
-                <img src="/images/linkedin.png" alt="linkedIn" />
-              </Link>
-              <Link to="https://instagram.com">
-                <img src="/images/instagram.png" alt="Instagram" />
-              </Link>
-            </div>
+    <Wrapper>
+      <div className="post">
+        <h2>{post.title}</h2>
+        <h5>September 20, 2023</h5>
+        <div className="img-container">
+          <img src={post.cover} alt="post cover" />
+        </div>
+        <div className="content">
+          <p className="desc">{post.description}</p>
+          <div className="social my-4">
+            <h4 className="mb-3">Share on</h4>
+            <Link to="https://twitter.com">
+              <img src="/images/twitter.png" alt="twitter" />
+            </Link>
+            <Link to="https://facebook.com">
+              <img src="/images/facebook.png" alt="facebook" />
+            </Link>
+            <Link to="https://linkedin.com">
+              <img src="/images/linkedin.png" alt="linkedIn" />
+            </Link>
+            <Link to="https://instagram.com">
+              <img src="/images/instagram.png" alt="Instagram" />
+            </Link>
           </div>
         </div>
-        <div className="related">
-          <h4 className="heading">More related posts from leadways blog</h4>
-          <RelatedPost id={id} />
-        </div>
-      </Wrapper>
-      <Footer />
-    </>
+      </div>
+      <div className="related">
+        <h4 className="heading">More related posts from leadways blog</h4>
+        <RelatedPost id={id} />
+      </div>
+    </Wrapper>
   );
 }
 
