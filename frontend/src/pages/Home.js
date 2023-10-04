@@ -163,14 +163,22 @@ const Home = () => {
       <h1>
         Welcome to Leadways blog, your number one destination for latest news
       </h1>
-      <h2 className="">Trending news</h2>
 
-      <div className="featured">{featuredItems}</div>
-      <h2>Latest news</h2>
-      <div className="others">{otherItems}</div>
-      <div className="more">
-        <Link to="/posts">More News</Link>
-      </div>
+      {featuredPost.length !== 0 && (
+        <>
+          <h2 className="">Trending news</h2>
+          <div className="featured">{featuredItems}</div>
+        </>
+      )}
+      {posts.length !== 0 && (
+        <>
+          <h2>Latest news</h2>
+          <div className="others">{otherItems}</div>
+          <div className="more">
+            <Link to="/posts">More News</Link>
+          </div>
+        </>
+      )}
     </Wrapper>
   );
 };

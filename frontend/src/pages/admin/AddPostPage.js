@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 // import { Tablet, Desktop } from "../../Responsive";
 
@@ -9,11 +9,15 @@ const Wrapper = styled.div`
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
+
+  span {
+    display: block;
+    text-align: center;
+    margin: 23px 0;
+  }
 `;
 
 function AddPostPage() {
-  const navigate = useNavigate();
-
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [cover, setCover] = useState(null);
@@ -52,8 +56,14 @@ function AddPostPage() {
       if (resp.status === 200) {
         // Success
         setMessage("post successfully created");
+        setValues({
+          title: "",
+          description: "",
+          author: "",
+          category: "",
+        });
+        setCover("");
         console.log("File uploaded successfully");
-        navigate("/admin");
       } else {
         // Handle error
         setError("could not create post");
@@ -150,7 +160,7 @@ function AddPostPage() {
               Submit
             </button>
           </form>
-          <Link to="/admin" className="btn btn-danger mt-4">
+          <Link to="/admin/okoro" className="btn btn-danger mt-4">
             Close
           </Link>
         </div>

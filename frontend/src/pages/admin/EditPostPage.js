@@ -15,14 +15,21 @@ function EditPostPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+
   const [cover, setCover] = useState(null);
+
   const [values, setValues] = useState({
     title: "",
     description: "",
     author: "",
     category: "",
   });
+  const [isFeatured, setIsFeatured] = useState(false);
+
+  // Function to handle the change in the selected option
+  const handleOptionChange = (e) => {
+    setIsFeatured(e.target.value === "true");
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +43,8 @@ function EditPostPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { title, category, description, author } = values;
+    // console.log(values);
+    // console.log(isFeatured);
     // Handle text and file uploads here
     const formData = new FormData();
     formData.append("title", title);
@@ -43,6 +52,7 @@ function EditPostPage() {
     formData.append("category", category);
     formData.append("author", author);
     formData.append("description", description);
+    formData.append("isFeatured", isFeatured);
 
     try {
       const resp = await fetch(`/post/${id}`, {
@@ -52,10 +62,11 @@ function EditPostPage() {
       //   console.log(resp.data);
       if (resp.status === 200) {
         // Success
-        setMessage("post updated successfully");
+
         console.log("File uploaded successfully");
-        navigate("/admin");
-        navigate("/some-route", { state: { message } });
+        navigate("/admin/okoro", {
+          state: { message: "post updated successfully" },
+        });
       } else {
         // Handle error
         setError("failed to update post");
@@ -82,24 +93,16 @@ function EditPostPage() {
     getPost();
   }, [id]);
 
-  const [selectedOption, setSelectedOption] = useState(true);
-
-  // Function to handle the change in the selected option
-  const handleOptionChange = (e) => {
-    setSelectedOption(e.target.value === "true");
-  };
-
   return (
     <Wrapper>
       <div className="container-fluid py-4 my-0 text-white bg-dark">
         <div className="container">
           <h1 className="text-darks">Add Post</h1>
           <form onSubmit={handleSubmit}>
-            {message !== "" && (
-              <span className="alert alert-success">{message}</span>
-            )}
             {error !== "" && (
-              <span className="alert alert-danger">{error}</span>
+              <span className="alert alert-danger my-3 text-center">
+                {error}
+              </span>
             )}
             <div className="form-group mb-3">
               <label className="mb-1" htmlFor="name">
@@ -155,16 +158,22 @@ function EditPostPage() {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <label>
-              Select an option:
+
+            <div className="form-group mb-5">
+              <label className="mb-1" htmlFor="isFeatured">
+                Featured Post
+              </label>
               <select
-                value={selectedOption.toString()}
+                className="form-select"
+                aria-label="Default select example"
+                value={isFeatured.toString()}
                 onChange={handleOptionChange}
               >
-                <option value="true">True</option>
                 <option value="false">False</option>
+                <option value="true">True</option>
               </select>
-            </label>
+            </div>
+
             <div className="form-group mb-3">
               <label className="mb-1" htmlFor="cover">
                 Post cover
@@ -181,7 +190,7 @@ function EditPostPage() {
               Update
             </button>
           </form>
-          <Link to="/admin" className="btn btn-danger mt-4">
+          <Link to="/admin/okoro" className="btn btn-danger mt-4">
             Close
           </Link>
         </div>

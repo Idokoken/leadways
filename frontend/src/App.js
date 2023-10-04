@@ -10,6 +10,7 @@ import AddPostPage from "./pages/admin/AddPostPage";
 import EditPostPage from "./pages/admin/EditPostPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path="/admin/okoro" element={<AdminPage />} />
         <Route path="/addpost" element={<AddPostPage />} />
         <Route path="/editpost/:id" element={<EditPostPage />} />
+
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />
     </Router>

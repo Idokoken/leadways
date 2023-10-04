@@ -59,7 +59,7 @@ postRoute.get("/related", async (req, res) => {
 // get featured Posts
 postRoute.get("/featured", async (req, res) => {
   try {
-    const posts = await Post.find({ isFeatured: false })
+    const posts = await Post.find({ isFeatured: true })
       .sort({ createdAt: -1 })
       .limit(2);
     res.status(200).json(posts);
@@ -92,7 +92,8 @@ postRoute.get("/:id", async (req, res) => {
 
 //update call
 postRoute.put("/:id", upload.single("cover"), async (req, res) => {
-  const { title, description, author, category } = req.body;
+  const { title, description, author, category, isFeatured } = req.body;
+  console.log(req.body);
   try {
     if (!title || !description || !req.file) {
       res.status(400).json("all fields are required");
@@ -101,7 +102,7 @@ postRoute.put("/:id", upload.single("cover"), async (req, res) => {
     //console.log({ title, description, author, category, cover });
     await Post.findByIdAndUpdate(
       req.params.id,
-      { title, description, author, category, cover },
+      { title, description, author, category, cover, isFeatured },
       { new: true }
     );
     res.status(200).json("successfully updated");
