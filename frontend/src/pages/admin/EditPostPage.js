@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 // import { Tablet, Desktop } from "../../Responsive";
 
 const Wrapper = styled.div`
@@ -9,6 +11,18 @@ const Wrapper = styled.div`
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
+
+  input,
+  textarea,
+  button,
+  select {
+    border: 2px solid rgba(0, 0, 0, 0.5);
+  }
+  span {
+    display: block;
+    text-align: center;
+    margin: 23px 0;
+  }
 `;
 
 function EditPostPage() {
@@ -69,7 +83,7 @@ function EditPostPage() {
         });
       } else {
         // Handle error
-        setError("failed to update post");
+        setError("failed to update post, all fields are required");
         console.error("File upload failed");
       }
     } catch (error) {
@@ -79,23 +93,23 @@ function EditPostPage() {
       console.log(error.message);
     }
   };
-  const getPost = async () => {
-    try {
-      const resp = await axios.get(`/post/${id}`);
-      setValues(resp.data);
-      console.log(resp.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
+    const getPost = async () => {
+      try {
+        const resp = await axios.get(`/post/${id}`);
+        setValues(resp.data);
+        console.log(resp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getPost();
   }, [id]);
 
   return (
     <Wrapper>
-      <div className="container-fluid py-4 my-0 text-white bg-dark">
+      <div className="container-fluid py-4 my-0">
         <div className="container">
           <h1 className="text-darks">Add Post</h1>
           <form onSubmit={handleSubmit}>
@@ -144,7 +158,7 @@ function EditPostPage() {
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group mb-3">
+            {/* <div className="form-group mb-3">
               <label className="mb-1" htmlFor="description">
                 Description
               </label>
@@ -157,6 +171,23 @@ function EditPostPage() {
                 value={values.description}
                 onChange={handleChange}
               ></textarea>
+            </div> */}
+
+            <div className="form-group mb-3">
+              <label className="mb-1" htmlFor="label">
+                Description
+              </label>
+              <CKEditor
+                editor={ClassicEditor}
+                name="description"
+                id="description"
+                rows="5"
+                data={values.description}
+                onChange={(event, editor) => {
+                  const data = editor.getData();
+                  setValues({ ...values, description: data });
+                }}
+              />
             </div>
 
             <div className="form-group mb-5">

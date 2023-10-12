@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import { Tablet } from "../Responsive";
+import moment from "moment";
 import RelatedPost from "../components/RelatedPost";
 
 const Wrapper = styled.div`
@@ -52,6 +53,7 @@ const Wrapper = styled.div`
   p {
     font-size: 18px;
     line-height: 35px;
+    text-indent: 30px;
     /* font-weight: 600; */
   }
   h5 {
@@ -85,18 +87,18 @@ const Wrapper = styled.div`
 function SinglePost() {
   const [post, setPost] = useState({});
   const { id } = useParams();
-
-  const getPost = async () => {
-    try {
-      const resp = await axios.get(`/post/${id}`);
-      setPost(resp.data);
-      console.log(resp.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const postUrl = window.location.href;
 
   useEffect(() => {
+    const getPost = async () => {
+      try {
+        const resp = await axios.get(`/post/${id}`);
+        setPost(resp.data);
+        console.log(resp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getPost();
   }, [id]);
 
@@ -107,25 +109,37 @@ function SinglePost() {
     <Wrapper>
       <div className="post">
         <h2>{post.title}</h2>
-        <h5>September 20, 2023</h5>
+        <h5>{moment(post.createdAt).format("DD MMMM, YYYY")}</h5>
         <div className="img-container">
           <img src={post.cover} alt="post cover" />
         </div>
         <div className="content">
-          <p className="desc">{post.description}</p>
+          <p
+            className="desc"
+            dangerouslySetInnerHTML={{ __html: post.description }}
+          />
           <div className="social my-4">
             <h4 className="mb-3">Share on</h4>
-            <Link to="https://twitter.com">
+            <Link
+              to={`https://twitter.com/intent/tweet?url=${postUrl}`}
+              target="_blank"
+            >
               <img src="/images/twitter.png" alt="twitter" />
             </Link>
-            <Link to="https://facebook.com">
+            <Link
+              to={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`}
+              target="_blank"
+            >
               <img src="/images/facebook.png" alt="facebook" />
             </Link>
-            <Link to="https://linkedin.com">
+            <Link
+              to={`https://www.linkedin.com/shareArticle?url=${postUrl}`}
+              target="_blank"
+            >
               <img src="/images/linkedin.png" alt="linkedIn" />
             </Link>
-            <Link to="https://instagram.com">
-              <img src="/images/instagram.png" alt="Instagram" />
+            <Link to={`whatsapp://send?text=${postUrl}`} target="_blank">
+              <img src="/images/whatsapp.png" alt="whatsapp" />
             </Link>
           </div>
         </div>

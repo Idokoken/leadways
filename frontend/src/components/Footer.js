@@ -46,6 +46,8 @@ const Wrapper = styled.footer`
   }
   .copywite {
     margin: 10px;
+    font-family: "Oleo Script Swash Caps", cursive;
+    ${Tablet({ fontSize: "20px" })}
   }
   img {
     width: 30px;
@@ -80,7 +82,7 @@ const Wrapper = styled.footer`
     text-decoration: none;
     color: inherit;
   }
-  a::hover {
+  a:hover {
     color: pink;
     font-weight: 600;
   }
@@ -98,9 +100,8 @@ function Footer() {
         </div>
         <div className="item">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam
+            Leadways news-blog is your number one destination for latest,
+            trending and honest news in Nigeria, Africa and the world at large
           </p>
         </div>
         <div className="item">

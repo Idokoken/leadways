@@ -10,6 +10,13 @@ class About extends Component {
       margin: 0;
       padding: 0;
       font-family: "Poppins", sans-serif;
+      background: linear-gradient(
+        243.22deg,
+        rgba(248, 238, 238, 0.9) 0%,
+        rgba(231, 225, 225, 0.63) 31.77%,
+        rgba(223, 225, 237, 0.72) 68.75%,
+        rgba(61, 40, 40, 0.45) 100%
+      );
 
       .img-container {
         width: 100%;
@@ -38,7 +45,7 @@ class About extends Component {
       h3 {
         color: var(--primary-color);
         font-family: "Lora", serif;
-        font-style: normal;
+        font-style: italic;
         font-weight: 700;
       }
       .content {
@@ -54,11 +61,11 @@ class About extends Component {
       <Wrapper>
         <div className="about container py-3 py-3">
           <h3 className="my-3">What Leadways Stands For</h3>
-          <p>
-            Leadways blog, registered on September 1, 2023 (RC No: 509632),
-            commenced online publication on Sptember 5, 2023.
+          <p style={{ textIndent: "30px" }}>
+            Leadways blog, registered on September 1, 2023, commenced online
+            publication on October 10, 2023.
           </p>
-          <p>
+          <p style={{ textIndent: "30px" }}>
             The Leadways is an independent online news blog,for the purpose of
             presenting balanced coverage of events, and of promoting the best
             interests of the People. It owes allegiance to no political party,

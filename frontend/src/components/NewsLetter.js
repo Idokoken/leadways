@@ -8,27 +8,21 @@ const Wrapper = styled.div`
   font-family: "Poppins", sans-serif;
 
   .newsletter {
-    position: relative;
     padding: 30px;
     color: white;
-  }
-  .newsletter::before {
-    content: "";
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    background-image: url("/images/newsletter_bg.png");
-    background-size: 100% 100%;
-    opacity: 0.7;
+    background: linear-gradient(
+      93.29deg,
+      #fc40c7 0.19%,
+      #1e44a6 26.84%,
+      #146765 70.85%,
+      #04970a 100%
+    );
   }
 
   h4 {
     margin: 0;
     margin-bottom: 30px;
-    position: relative;
-    color: var(--primary-color);
+    color: white;
   }
   .subscribe {
     display: flex;
@@ -39,14 +33,12 @@ const Wrapper = styled.div`
     width: 150px;
     border: none;
     border-radius: 20px 0 0 20px;
-    position: relative;
     ${Tablet({ width: "250px" })}
   }
   button {
-    position: relative;
     padding: 8px 5px;
     padding-right: 15px;
-    background: teal;
+    background: black;
     color: white;
     border: none;
     border-radius: 0 20px 20px 0;

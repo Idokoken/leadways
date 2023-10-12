@@ -80,7 +80,10 @@ function Posts() {
         <h4>{item.title}</h4>
 
         <div className="desc">
-          <p>{item.description.slice(0, 100)}</p>
+          <p
+            className="desc"
+            dangerouslySetInnerHTML={{ __html: item.description.slice(0, 100) }}
+          />
           <span>more</span>
         </div>
       </Link>

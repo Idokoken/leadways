@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-// import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 // import { Tablet, Desktop } from "../../Responsive";
 
 const Wrapper = styled.div`
@@ -9,6 +10,20 @@ const Wrapper = styled.div`
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    243.22deg,
+    rgba(248, 238, 238, 0.9) 0%,
+    rgba(231, 225, 225, 0.63) 31.77%,
+    rgba(223, 225, 237, 0.72) 68.75%,
+    rgba(61, 40, 40, 0.45) 100%
+  );
+
+  input,
+  textarea,
+  button,
+  select {
+    border: 2px solid rgba(0, 0, 0, 0.5);
+  }
 
   span {
     display: block;
@@ -21,9 +36,9 @@ function AddPostPage() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [cover, setCover] = useState(null);
+  const [description, setDescription] = useState("");
   const [values, setValues] = useState({
     title: "",
-    description: "",
     author: "",
     category: "",
   });
@@ -39,7 +54,7 @@ function AddPostPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { title, category, description, author } = values;
+    const { title, category, author } = values;
     // Handle text and file uploads here
     const formData = new FormData();
     formData.append("title", title);
@@ -58,15 +73,15 @@ function AddPostPage() {
         setMessage("post successfully created");
         setValues({
           title: "",
-          description: "",
           author: "",
           category: "",
         });
+        setDescription("");
         setCover("");
         console.log("File uploaded successfully");
       } else {
         // Handle error
-        setError("could not create post");
+        setError("could not create post, all fields are required");
         console.error("File upload failed");
       }
       // window.location = "/";
@@ -79,7 +94,7 @@ function AddPostPage() {
   };
   return (
     <Wrapper>
-      <div className="container-fluid py-4 my-0 text-white bg-dark">
+      <div className="container-fluid py-4 my-0">
         <div className="container">
           <h1 className="text-darks">Add Post</h1>
           <form onSubmit={handleSubmit}>
@@ -129,7 +144,7 @@ function AddPostPage() {
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group mb-3">
+            {/* <div className="form-group mb-3">
               <label className="mb-1" htmlFor="label">
                 Description
               </label>
@@ -142,7 +157,25 @@ function AddPostPage() {
                 value={values.description}
                 onChange={handleChange}
               ></textarea>
+            </div> */}
+
+            <div className="form-group mb-3">
+              <label className="mb-1" htmlFor="label">
+                Description
+              </label>
+              <CKEditor
+                editor={ClassicEditor}
+                name="description"
+                id="description"
+                rows="5"
+                value={description}
+                onChange={(event, editor) => {
+                  const data = editor.getData();
+                  setDescription(data);
+                }}
+              />
             </div>
+
             <div className="form-group mb-3">
               <label className="mb-1" htmlFor="cover">
                 Post cover

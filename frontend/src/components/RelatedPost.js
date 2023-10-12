@@ -69,7 +69,7 @@ function RelatedPost({ id }) {
   }, []);
 
   const items = relatedPosts
-    .filter((p, i) => p._id != id)
+    .filter((p, i) => p._id !== id)
     .map((item, i) => (
       <div className="related-post" key={item._id}>
         <Link

@@ -18,6 +18,11 @@ const Wrapper = styled.div`
     font-weight: 600;
     font-size: 35px;
   }
+  span {
+    display: block;
+    text-align: center;
+    margin: 23px 0;
+  }
 `;
 
 function AdminPage() {
@@ -92,7 +97,7 @@ function AdminPage() {
           <>
             <h3 className="text-info mt-4 mb-2">News Posts</h3>
 
-            <table className="table table-dark table-striped post">
+            <table className="table table-striped post">
               <thead>
                 <tr>
                   <th scope="col">Cover</th>

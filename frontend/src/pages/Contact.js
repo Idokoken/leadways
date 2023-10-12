@@ -7,9 +7,19 @@ const Wrapper = styled.div`
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    243.22deg,
+    rgba(248, 238, 238, 0.9) 0%,
+    rgba(231, 225, 225, 0.63) 31.77%,
+    rgba(223, 225, 237, 0.72) 68.75%,
+    rgba(61, 40, 40, 0.45) 100%
+  );
 
   h3 {
     color: var(--primary-color);
+    font-family: "Lora", serif;
+    font-style: italic;
+    font-weight: 700;
   }
 
   .address a {
@@ -35,7 +45,7 @@ const Wrapper = styled.div`
 function Contact() {
   return (
     <Wrapper>
-      <div className="contact py-4 m-4">
+      <div className="contact py-4">
         <h3 className="mx-4">Get in Touch with Us</h3>
         <div className="address m-4">
           <h5>General Issues</h5>

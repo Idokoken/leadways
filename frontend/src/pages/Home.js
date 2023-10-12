@@ -137,7 +137,9 @@ const Home = () => {
         </div>
         <div className="container">
           <h3>{item.title}</h3>
-          <p>{item.description.slice(0, 200)}</p>
+          <p
+            dangerouslySetInnerHTML={{ __html: item.description.slice(0, 200) }}
+          />
         </div>
       </Link>
     </div>
@@ -152,7 +154,10 @@ const Home = () => {
         <h4>{item.title}</h4>
 
         <div className="desc">
-          <p>{item.description.slice(0, 100)}</p>
+          <p
+            className=""
+            dangerouslySetInnerHTML={{ __html: item.description.slice(0, 100) }}
+          />
           <span>more</span>
         </div>
       </Link>
