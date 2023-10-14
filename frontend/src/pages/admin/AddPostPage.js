@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 // import { Tablet, Desktop } from "../../Responsive";
 
 const Wrapper = styled.div`
@@ -33,6 +34,8 @@ const Wrapper = styled.div`
 `;
 
 function AddPostPage() {
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [cover, setCover] = useState(null);
@@ -64,7 +67,7 @@ function AddPostPage() {
     formData.append("description", description);
 
     try {
-      const resp = await fetch("/post", {
+      const resp = await fetch(`${apiUrl}/post`, {
         method: "POST",
         body: formData,
       });

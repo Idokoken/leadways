@@ -101,9 +101,11 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [featuredPost, setFeaturedPost] = useState([]);
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const getLatestPosts = async () => {
     try {
-      const resp = await axios.get(`/post/latest`);
+      const resp = await axios.get(`${apiUrl}/post/latest`);
       setPosts(resp.data);
       console.log(resp.data);
     } catch (error) {
@@ -112,7 +114,7 @@ const Home = () => {
   };
   const getfeaturedPosts = async () => {
     try {
-      const resp = await axios.get(`/post/featured`);
+      const resp = await axios.get(`${apiUrl}/post/featured`);
       setFeaturedPost(resp.data);
       console.log(resp.data);
     } catch (error) {
@@ -130,7 +132,7 @@ const Home = () => {
     <div className="post" key={item._id}>
       <Link
         style={{ textDecoration: "none", color: "inherit" }}
-        to={`/post/${item._id}`}
+        to={`${apiUrl}/post/${item._id}`}
       >
         <div className="img-container">
           <img src={item.cover} alt="product cover" width="100" height="100" />
@@ -149,7 +151,7 @@ const Home = () => {
     <div className="post" key={item._id}>
       <Link
         style={{ textDecoration: "none", color: "inherit" }}
-        to={`/post/${item._id}`}
+        to={`${apiUrl}/post/${item._id}`}
       >
         <h4>{item.title}</h4>
 

@@ -53,10 +53,11 @@ const Wrapper = styled.div`
 
 function RelatedPost({ id }) {
   const [relatedPosts, setRelatedPosts] = useState([]);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const getPosts = async () => {
     try {
-      const resp = await axios.get(`/post/related`);
+      const resp = await axios.get(`${apiUrl}/post/related`);
       setRelatedPosts(resp.data);
       console.log(resp.data);
     } catch (error) {
@@ -74,7 +75,7 @@ function RelatedPost({ id }) {
       <div className="related-post" key={item._id}>
         <Link
           style={{ textDecoration: "none", color: "inherit" }}
-          to={`/post/${item._id}`}
+          to={`${apiUrl}/post/${item._id}`}
         >
           <div className="img-container">
             <img

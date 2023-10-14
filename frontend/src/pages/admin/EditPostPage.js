@@ -26,6 +26,7 @@ const Wrapper = styled.div`
 `;
 
 function EditPostPage() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { id } = useParams();
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -69,7 +70,7 @@ function EditPostPage() {
     formData.append("isFeatured", isFeatured);
 
     try {
-      const resp = await fetch(`/post/${id}`, {
+      const resp = await fetch(`${apiUrl}/post/${id}`, {
         method: "PUT",
         body: formData,
       });
@@ -97,7 +98,7 @@ function EditPostPage() {
   useEffect(() => {
     const getPost = async () => {
       try {
-        const resp = await axios.get(`/post/${id}`);
+        const resp = await axios.get(`${apiUrl}/post/${id}`);
         setValues(resp.data);
         console.log(resp.data);
       } catch (error) {

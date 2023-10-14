@@ -10,9 +10,16 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 4000;
 
+const corsOptions = {
+  origin: "https://leadways.netlify.app/",
+  optionsSuccessStatus: 200,
+  methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+  Credential: true,
+};
+
 //Middleware setup
 app.use(morgan("dev"));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
