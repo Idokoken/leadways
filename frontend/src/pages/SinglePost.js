@@ -90,19 +90,18 @@ function SinglePost() {
   const postUrl = window.location.href;
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  const getPost = async () => {
-    try {
-      const resp = await axios.get(`${apiUrl}/post/${id}`);
-      setPost(resp.data);
-      console.log(resp.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const getPost = async () => {
+      try {
+        const resp = await axios.get(`${apiUrl}/post/${id}`);
+        setPost(resp.data);
+        console.log(resp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getPost();
-  }, [id]);
+  }, [id, apiUrl]);
 
   return (
     <Wrapper>

@@ -55,19 +55,18 @@ function RelatedPost({ id }) {
   const [relatedPosts, setRelatedPosts] = useState([]);
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  const getPosts = async () => {
-    try {
-      const resp = await axios.get(`${apiUrl}/post/related`);
-      setRelatedPosts(resp.data);
-      console.log(resp.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const getPosts = async () => {
+      try {
+        const resp = await axios.get(`${apiUrl}/post/related`);
+        setRelatedPosts(resp.data);
+        console.log(resp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getPosts();
-  }, []);
+  }, [apiUrl]);
 
   const items = relatedPosts
     .filter((p, i) => p._id !== id)

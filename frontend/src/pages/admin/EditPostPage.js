@@ -106,7 +106,7 @@ function EditPostPage() {
       }
     };
     getPost();
-  }, [id]);
+  }, [id, apiUrl]);
 
   return (
     <Wrapper>

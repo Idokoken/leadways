@@ -103,29 +103,28 @@ const Home = () => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  const getLatestPosts = async () => {
-    try {
-      const resp = await axios.get(`${apiUrl}/post/latest`);
-      setPosts(resp.data);
-      console.log(resp.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const getfeaturedPosts = async () => {
-    try {
-      const resp = await axios.get(`${apiUrl}/post/featured`);
-      setFeaturedPost(resp.data);
-      console.log(resp.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const getfeaturedPosts = async () => {
+      try {
+        const resp = await axios.get(`${apiUrl}/post/featured`);
+        setFeaturedPost(resp.data);
+        console.log(resp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getLatestPosts = async () => {
+      try {
+        const resp = await axios.get(`${apiUrl}/post/latest`);
+        setPosts(resp.data);
+        console.log(resp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getfeaturedPosts();
     getLatestPosts();
-  }, []);
+  }, [apiUrl]);
   // const location = useLocation();
   // const navigate = useNavigate();
   const featuredItems = featuredPost.map((item, i) => (
