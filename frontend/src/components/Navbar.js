@@ -21,6 +21,10 @@ const Wrapper = styled.div`
     background-clip: text;
     text-fill-color: transparent;
   }
+  a:hover {
+    color: #0a0f83;
+    font-weight: 600;
+  }
 `;
 
 function Navbar({ user }) {

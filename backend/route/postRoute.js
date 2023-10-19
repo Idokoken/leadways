@@ -94,11 +94,15 @@ postRoute.get("/:id", async (req, res) => {
 postRoute.put("/:id", upload.single("cover"), async (req, res) => {
   const { title, description, author, category, isFeatured } = req.body;
   console.log(req.body);
+  let cover;
   try {
-    if (!title || !description || !req.file) {
+    if (!title || !description) {
       res.status(400).json("all fields are required");
     }
-    const cover = req.file.path;
+    if (req.file != null && !req.file.isEmpty()) {
+      cover = req.file.path;
+    }
+
     //console.log({ title, description, author, category, cover });
     await Post.findByIdAndUpdate(
       req.params.id,

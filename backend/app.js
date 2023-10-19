@@ -19,6 +19,7 @@ const corsOptions = {
 
 //Middleware setup
 app.use(morgan("dev"));
+// app.use(cors());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

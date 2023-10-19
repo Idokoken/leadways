@@ -83,8 +83,8 @@ const Wrapper = styled.footer`
     color: inherit;
   }
   a:hover {
-    color: pink;
-    font-weight: 600;
+    color: #0a0f83;
+    font-weight: 700;
   }
 `;
 
@@ -123,19 +123,27 @@ function Footer() {
           <h4>Follow Us</h4>
           <div className="icons-container">
             <div className="icon-container">
-              <i className="fa-brands fa-facebook icon"></i>
+              <Link to="https://facebook.com/leadways">
+                <i className="fa-brands fa-facebook icon"></i>
+              </Link>
             </div>
 
             <div className="icon-container">
-              <i className="fa-brands fa-twitter icon"></i>
+              <Link to="https://twitter.com/leadways">
+                <i className="fa-brands fa-twitter icon"></i>
+              </Link>
             </div>
 
             <div className="icon-container">
-              <i className="fa-brands fa-instagram icon"></i>
+              <Link to="https://instagram.com/leadways">
+                <i className="fa-brands fa-instagram icon"></i>
+              </Link>
             </div>
 
             <div className="icon-container">
-              <i className="fa-brands fa-youtube icon"></i>
+              <Link to="https://youtube.com/leadways">
+                <i className="fa-brands fa-youtube icon"></i>
+              </Link>
             </div>
           </div>
         </div>

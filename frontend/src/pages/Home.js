@@ -32,8 +32,12 @@ const Wrapper = styled.div`
     height: 40vh;
     background-color: grey;
     margin: auto;
-    border-radius: 10px;
-    ${Tablet({ width: "70%", height: "50vh" })}/* ${Desktop({
+    /* border-radius: 20px; */
+    ${Tablet({
+      width: "80%",
+      height: "60vh",
+      // borderRadius: "30px",
+    })}/* ${Desktop({
       width: "70%",
     })} */
   }
@@ -41,6 +45,8 @@ const Wrapper = styled.div`
     height: 100%;
     width: 100%;
     object-fit: cover;
+    /* border-radius: 20px;
+    ${Tablet({ borderRadius: "30px" })} */
   }
   .featured h3 {
     font-family: Georgia, "Times New Roman", Times, serif;
@@ -57,8 +63,8 @@ const Wrapper = styled.div`
     padding-bottom: 20px;
     /* ${Tablet({ paddingBottom: "50px" })} */
   }
-  .featured .post::hover {
-    opacity: 0.5;
+  .post a:hover {
+    opacity: 0.6;
   }
   .others {
     padding: 20px;
@@ -95,6 +101,10 @@ const Wrapper = styled.div`
     border-radius: 30px;
     text-decoration: none;
   }
+  .more a:hover {
+    color: #0a0f83;
+    font-weight: 700;
+  }
 `;
 
 const Home = () => {
@@ -125,21 +135,20 @@ const Home = () => {
     getfeaturedPosts();
     getLatestPosts();
   }, [apiUrl]);
-  // const location = useLocation();
-  // const navigate = useNavigate();
+
   const featuredItems = featuredPost.map((item, i) => (
     <div className="post" key={item._id}>
       <Link
         style={{ textDecoration: "none", color: "inherit" }}
-        to={`${apiUrl}/post/${item._id}`}
+        to={`/post/${item._id}`}
       >
         <div className="img-container">
           <img src={item.cover} alt="product cover" width="100" height="100" />
         </div>
         <div className="container">
-          <h3>{item.title}</h3>
+          <h3>{item.title.slice(0, 100)}</h3>
           <p
-            dangerouslySetInnerHTML={{ __html: item.description.slice(0, 200) }}
+            dangerouslySetInnerHTML={{ __html: item.description.slice(0, 100) }}
           />
         </div>
       </Link>
@@ -150,9 +159,9 @@ const Home = () => {
     <div className="post" key={item._id}>
       <Link
         style={{ textDecoration: "none", color: "inherit" }}
-        to={`${apiUrl}/post/${item._id}`}
+        to={`/post/${item._id}`}
       >
-        <h4>{item.title}</h4>
+        <h4>{item.title.slice(0, 100)}</h4>
 
         <div className="desc">
           <p

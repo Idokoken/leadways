@@ -3,8 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import moment from "moment";
-
-// import { Tablet, Desktop } from "../../Responsive";
+import { Tablet } from "../../Responsive";
 
 const Wrapper = styled.div`
   min-height: 50vh;
@@ -18,14 +17,40 @@ const Wrapper = styled.div`
     font-weight: 600;
     font-size: 35px;
   }
+  h3 {
+    color: var(--primary-color);
+    font-weight: 600;
+  }
   span {
     display: block;
     text-align: center;
     margin: 23px 0;
   }
+  table {
+    font-size: 10px;
+    ${Tablet({ fontSize: "16px" })}
+  }
+  img {
+    width: 25px;
+    height: 25px;
+    ${Tablet({ width: "40px", height: "40px" })}
+  }
+  table a {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    ${Tablet({ width: "40px", height: "40px" })}
+  }
+  table button {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    ${Tablet({ width: "40px", height: "40px" })}
+  }
 `;
 
 function AdminPage() {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const location = useLocation();
   // Access the message from the state object
   const message = location.state && location.state.message;
@@ -33,7 +58,7 @@ function AdminPage() {
 
   const getPosts = async () => {
     try {
-      const resp = await axios.get(`/post`);
+      const resp = await axios.get(`https://leadways.cyclic.app/post`);
       setPosts(resp.data);
       console.log(resp.data);
     } catch (error) {
@@ -47,7 +72,7 @@ function AdminPage() {
 
   const deletePost = async (id) => {
     try {
-      await axios.delete(`/post/${id}`);
+      await axios.delete(`${apiUrl}/post/${id}`);
       getPosts();
       // if (resp.ok) {
       //   // const updatedPost = posts.filter((post) => post._id !== id);
@@ -63,9 +88,9 @@ function AdminPage() {
   const items = posts.map((post, i) => (
     <tr key={post._id}>
       <th scope="row">
-        <img src={post.cover} alt="cover" height="40" width="40" />
+        <img src={post.cover} alt="cover" />
       </th>
-      <td colSpan="2">{post.title}</td>
+      <td colSpan="2">{post.title.slice(0, 100)}</td>
       <td>
         <Link className="btn btn-secondary" to={`/editpost/${post._id}`}>
           <i className="fa-regular fa-pen-to-square"></i>
@@ -95,7 +120,7 @@ function AdminPage() {
         {message && <span className="alert alert-success">{message}</span>}
         {posts.length !== 0 ? (
           <>
-            <h3 className="text-info mt-4 mb-2">News Posts</h3>
+            <h3 className="my-4">News Posts</h3>
 
             <table className="table table-striped post">
               <thead>

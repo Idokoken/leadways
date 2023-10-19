@@ -21,18 +21,21 @@ const Wrapper = styled.div`
   .content {
     margin: 20px;
   }
-  .img-container {
+  .post .img-container {
     margin: 20px;
     margin-left: auto;
     margin-right: auto;
     width: 95%;
     height: 40vh;
+    /* border-radius: 20px; */
     ${Tablet({ width: "90%", height: "50vh" })}
   }
-  img {
+  .post img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* border-radius: 20px; */
+    /* ${Tablet({ borderRadius: "30px" })} */
   }
   h2 {
     font-family: "Lora", serif;
@@ -40,7 +43,8 @@ const Wrapper = styled.div`
     font-weight: 700;
     text-align: center;
     margin-top: 15px;
-    font-size: 40px;
+    font-size: 25px;
+    ${Tablet({ fontSize: "40px" })}
   }
   .related .heading {
     font-family: "Lora", serif;
@@ -52,16 +56,23 @@ const Wrapper = styled.div`
   }
   p {
     font-size: 18px;
-    line-height: 35px;
+    line-height: 40px;
     text-indent: 30px;
     /* font-weight: 600; */
   }
-  h5 {
-    margin: 0;
+  .author {
     margin-left: 20px;
     font-size: 15px;
     font-family: "Poppins", sans-serif;
     font-style: italic;
+  }
+  h5 {
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    font-style: italic;
+    color: var(--primary-color);
   }
   .social {
     margin-bottom: 2px;
@@ -108,14 +119,14 @@ function SinglePost() {
       <div className="post">
         <h2>{post.title}</h2>
         <h5>{moment(post.createdAt).format("DD MMMM, YYYY")}</h5>
+        <div className="author">
+          <span>by {post.author}</span>
+        </div>
         <div className="img-container">
           <img src={post.cover} alt="post cover" />
         </div>
         <div className="content">
-          <p
-            className="desc"
-            dangerouslySetInnerHTML={{ __html: post.description }}
-          />
+          <p dangerouslySetInnerHTML={{ __html: post.description }} />
           <div className="social my-4">
             <h4 className="mb-3">Share on</h4>
             <Link

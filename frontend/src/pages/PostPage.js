@@ -10,10 +10,11 @@ const Wrapper = styled.div`
 
   h2 {
     font-family: "Lora", serif;
-    font-style: normal;
+    font-style: italic;
     font-weight: 700;
     text-align: center;
-    margin-top: 15px;
+    margin: 25px 0;
+    color: var(--primary-color);
   }
 `;
 

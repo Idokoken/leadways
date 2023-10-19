@@ -14,14 +14,14 @@ const Wrapper = styled.div`
     grid-template-columns: 100%;
     gap: 10px;
     padding: 20px;
-    ${Tablet({ gridTemplateColumns: "33% 33% 33%" })}
-    ${Desktop({ gridTemplateColumns: "25% 25% 25%", gap: "20px" })}
+    ${Tablet({ gridTemplateColumns: "40% 40%", gap: "50px" })}
+    ${Desktop({ gridTemplateColumns: "30% 30% 30%", gap: "50px" })}
   }
 
   .related-post {
     /* height: 250px; */
     padding: 10px;
-    box-shadow: 0 5px 5px #888888;
+    box-shadow: 0 3px 3px #888888;
   }
 
   .related-post .img-container {
@@ -48,6 +48,26 @@ const Wrapper = styled.div`
   .related-post span {
     color: var(--primary-color);
     font-weight: 500;
+  }
+  .related-post a:hover {
+    opacity: 0.6;
+  }
+  .more {
+    margin: 30px;
+    margin-top: 20px;
+  }
+  .more a {
+    padding: 10px 15px;
+    background: var(--primary-color);
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 30px;
+    text-decoration: none;
+  }
+  .more a:hover {
+    color: #0a0f83;
+    font-weight: 700;
   }
 `;
 
@@ -84,7 +104,7 @@ function RelatedPost({ id }) {
               height="100"
             />
           </div>
-          <h4>{item.title}</h4>
+          <h4>{item.title.slice(0, 100)}</h4>
 
           <div className="desc">
             <p>{item.description.slice(0, 100)}</p>
@@ -96,6 +116,9 @@ function RelatedPost({ id }) {
   return (
     <Wrapper>
       <div className="relatedPost-container">{items}</div>
+      <div className="more">
+        <Link to="/posts">More News</Link>
+      </div>
     </Wrapper>
   );
 }

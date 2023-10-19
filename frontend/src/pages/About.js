@@ -105,19 +105,17 @@ class About extends Component {
 
           <h3>Editorial Team</h3>
           <p>
-            Nduka Idoko, Comrade Kerian Onah, Hon. Meletus Ona, Henry Udom,
-            Musa-Ibrahim juwoo, Jonathan Ishaku.
+            Romanus Eze, Stanley Mike, Hon. Kingsley metu, Onyekach Henry,
+            Ibrahim magu, Jonathan Udom.
           </p>
 
           <div className="categories">
             <h3>Our News Categories includes</h3>
-            <p>Featured</p>
             <p>Politics</p>
-            <p>World</p>
-            <p>Sport</p>
-            <p>Technology</p>
+            <p>Entertainment</p>
             <p>Art</p>
-            <p>Business</p>
+            <p>Technology</p>
+            <p>Sport</p>
           </div>
         </div>
         <NewsLetter />

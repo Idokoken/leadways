@@ -19,6 +19,15 @@ const Wrapper = styled.div`
     rgba(61, 40, 40, 0.45) 100%
   );
 
+  h1 {
+    font-family: "Lora", serif;
+    font-style: italic;
+    font-weight: 700;
+    margin: 15px 0;
+    font-size: 40px;
+    color: var(--primary-color);
+  }
+
   input,
   textarea,
   button,
@@ -36,6 +45,7 @@ const Wrapper = styled.div`
 function AddPostPage() {
   const apiUrl = process.env.REACT_APP_API_URL;
 
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [cover, setCover] = useState(null);
@@ -66,6 +76,7 @@ function AddPostPage() {
     formData.append("author", author);
     formData.append("description", description);
 
+    setLoading(true);
     try {
       const resp = await fetch(`${apiUrl}/post`, {
         method: "POST",
@@ -81,18 +92,21 @@ function AddPostPage() {
         });
         setDescription("");
         setCover("");
+        // window.location = "/addpost";
         console.log("File uploaded successfully");
       } else {
         // Handle error
         setError("could not create post, all fields are required");
         console.error("File upload failed");
       }
+      setLoading(false);
       // window.location = "/";
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setError(error.response.data);
       }
       console.log(error.message);
+      setLoading(false);
     }
   };
   return (
@@ -107,7 +121,7 @@ function AddPostPage() {
             {error !== "" && (
               <span className="alert alert-danger">{error}</span>
             )}
-            <div className="form-group mb-3">
+            <div className="form-group mb-4">
               <label className="mb-1" htmlFor="name">
                 Title
               </label>
@@ -120,7 +134,7 @@ function AddPostPage() {
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group mb-3">
+            <div className="form-group mb-4">
               <label className="mb-1" htmlFor="author">
                 Author
               </label>
@@ -134,7 +148,7 @@ function AddPostPage() {
               />
             </div>
 
-            <div className="form-group mb-3">
+            <div className="form-group mb-4">
               <label className="mb-1" htmlFor="category">
                 Category
               </label>
@@ -147,7 +161,7 @@ function AddPostPage() {
                 onChange={handleChange}
               />
             </div>
-            {/* <div className="form-group mb-3">
+            {/* <div className="form-group mb-4">
               <label className="mb-1" htmlFor="label">
                 Description
               </label>
@@ -162,7 +176,7 @@ function AddPostPage() {
               ></textarea>
             </div> */}
 
-            <div className="form-group mb-3">
+            <div className="form-group mb-4">
               <label className="mb-1" htmlFor="label">
                 Description
               </label>
@@ -179,7 +193,7 @@ function AddPostPage() {
               />
             </div>
 
-            <div className="form-group mb-3">
+            <div className="form-group mb-4">
               <label className="mb-1" htmlFor="cover">
                 Post cover
               </label>
@@ -192,8 +206,12 @@ function AddPostPage() {
                 onChange={handleFileChange}
               />
             </div>
-            <button type="submit" className="btn btn-info text-light mt-3">
-              Submit
+            <button
+              type="submit"
+              className="btn btn-info text-light mt-3"
+              disabled={loading}
+            >
+              {loading ? "Submiting..." : "Submit"}
             </button>
           </form>
           <Link to="/admin/okoro" className="btn btn-danger mt-4">

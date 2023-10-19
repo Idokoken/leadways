@@ -12,6 +12,15 @@ const Wrapper = styled.div`
   padding: 0;
   font-family: "Poppins", sans-serif;
 
+  h1 {
+    font-family: "Lora", serif;
+    font-style: italic;
+    font-weight: 700;
+    margin: 15px 0;
+    font-size: 40px;
+    color: var(--primary-color);
+  }
+
   input,
   textarea,
   button,
@@ -30,6 +39,7 @@ function EditPostPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [cover, setCover] = useState(null);
 
@@ -69,6 +79,7 @@ function EditPostPage() {
     formData.append("description", description);
     formData.append("isFeatured", isFeatured);
 
+    setLoading(true);
     try {
       const resp = await fetch(`${apiUrl}/post/${id}`, {
         method: "PUT",
@@ -87,11 +98,13 @@ function EditPostPage() {
         setError("failed to update post, all fields are required");
         console.error("File upload failed");
       }
+      setLoading(false);
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setError(error.response.data);
       }
       console.log(error.message);
+      setLoading(false);
     }
   };
 
@@ -119,7 +132,7 @@ function EditPostPage() {
                 {error}
               </span>
             )}
-            <div className="form-group mb-3">
+            <div className="form-group mb-4">
               <label className="mb-1" htmlFor="name">
                 Title
               </label>
@@ -132,7 +145,7 @@ function EditPostPage() {
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group mb-3">
+            <div className="form-group mb-4">
               <label className="mb-1" htmlFor="author">
                 Author
               </label>
@@ -146,7 +159,7 @@ function EditPostPage() {
               />
             </div>
 
-            <div className="form-group mb-3">
+            <div className="form-group mb-4">
               <label className="mb-1" htmlFor="category">
                 Category
               </label>
@@ -159,7 +172,7 @@ function EditPostPage() {
                 onChange={handleChange}
               />
             </div>
-            {/* <div className="form-group mb-3">
+            {/* <div className="form-group mb-4">
               <label className="mb-1" htmlFor="description">
                 Description
               </label>
@@ -174,7 +187,7 @@ function EditPostPage() {
               ></textarea>
             </div> */}
 
-            <div className="form-group mb-3">
+            <div className="form-group mb-4">
               <label className="mb-1" htmlFor="label">
                 Description
               </label>
@@ -206,7 +219,7 @@ function EditPostPage() {
               </select>
             </div>
 
-            <div className="form-group mb-3">
+            <div className="form-group mb-4">
               <label className="mb-1" htmlFor="cover">
                 Post cover
               </label>
@@ -218,8 +231,12 @@ function EditPostPage() {
                 onChange={handleFileChange}
               />
             </div>
-            <button type="submit" className="btn btn-info text-light mt-3">
-              Update
+            <button
+              type="submit"
+              className="btn btn-info text-light mt-3"
+              disabled={loading}
+            >
+              {loading ? "Updating..." : "Update"}
             </button>
           </form>
           <Link to="/admin/okoro" className="btn btn-danger mt-4">
