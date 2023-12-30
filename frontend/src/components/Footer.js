@@ -28,7 +28,7 @@ const Wrapper = styled.footer`
   .footer .item .icon-header h3 {
     font-size: 30px;
     font-family: "Lobster", cursive;
-    background: linear-gradient(180deg, #b80a0a 47.92%, #280c78 79.69%);
+    background: linear-gradient(180deg, #FFDA16 30%, #090808 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -95,13 +95,14 @@ function Footer() {
         <div className="item">
           <div className="icon-header">
             <img src="/images/brand.png" alt="brand" />{" "}
-            <h3 className="ms-2">Leadways</h3>
+            <h3 className="ms-2">ExpertGuide</h3>
           </div>
         </div>
         <div className="item">
           <p>
-            Leadways news-blog is your number one destination for latest,
-            trending and honest news in Nigeria, Africa and the world at large
+            ExpertGuide news-blog is your number one destination where you can read and learn latest and
+            trending news about financial markets and other general information
+            making arounds the globe.
           </p>
         </div>
         <div className="item">
@@ -110,14 +111,9 @@ function Footer() {
             <Link to="/">Home</Link>
           </p>
           <p>
-            <Link to="/post">Posts</Link>
+            <Link to="/posts">Posts</Link>
           </p>
-          <p>
-            <Link to="/about">About</Link>
-          </p>
-          <p>
-            <Link to="/contact">Contact</Link>
-          </p>
+
         </div>
         <div className="item">
           <h4>Follow Us</h4>
@@ -150,7 +146,7 @@ function Footer() {
       </div>
       <div className="rule">
         <p className="copywite">
-          All Right reversed &copy; Leadways-news 2023{" "}
+          All Right reversed &copy; ExpertGuide-Blog 2023{" "}
         </p>
       </div>
     </Wrapper>

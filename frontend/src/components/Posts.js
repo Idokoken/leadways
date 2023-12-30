@@ -14,7 +14,7 @@ const Wrapper = styled.div`
     grid-template-columns: 100%;
     gap: 10px;
     padding: 20px;
-    ${Tablet({ gridTemplateColumns: "40% 40%", gap: "50px" })}
+    ${Tablet({ gridTemplateColumns: "40% 40%", gap: "50px", paddingLeft: '40px' })}
     ${Desktop({ gridTemplateColumns: "30% 30% 30%", gap: "50px" })}
   }
 

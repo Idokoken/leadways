@@ -94,7 +94,7 @@ function RelatedPost({ id }) {
       <div className="related-post" key={item._id}>
         <Link
           style={{ textDecoration: "none", color: "inherit" }}
-          to={`${apiUrl}/post/${item._id}`}
+          to={`/post/${item._id}`}
         >
           <div className="img-container">
             <img

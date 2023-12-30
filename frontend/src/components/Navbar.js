@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     /* color: var(--primary-color); */
     font-size: 30px;
     font-family: "Lobster", cursive;
-    background: linear-gradient(180deg, #b80a0a 47.92%, #280c78 79.69%);
+    background: linear-gradient(180deg, #FFDA16 30%, #090808 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -40,7 +40,7 @@ function Navbar({ user }) {
               height="24"
               className="d-inline-block align-text-top me-2"
             />
-            leadways
+            ExpertGuide
           </Link>
           <button
             className="navbar-toggler"
@@ -65,16 +65,7 @@ function Navbar({ user }) {
                   All Posts
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/contact">
-                  Contact Us
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/about">
-                  About Us
-                </NavLink>
-              </li>
+
             </ul>
           </div>
         </div>

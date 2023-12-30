@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
-import { Tablet } from "../Responsive";
+import { Desktop, Tablet } from "../Responsive";
 import moment from "moment";
-import RelatedPost from "../components/RelatedPost";
+
 
 const Wrapper = styled.div`
   padding: 0;
@@ -26,9 +26,11 @@ const Wrapper = styled.div`
     margin-left: auto;
     margin-right: auto;
     width: 95%;
+    background-color: grey;
     height: 40vh;
     /* border-radius: 20px; */
     ${Tablet({ width: "90%", height: "50vh" })}
+    ${Desktop({ width: "90%", height: "60vh" })}
   }
   .post img {
     width: 100%;
@@ -38,7 +40,7 @@ const Wrapper = styled.div`
     /* ${Tablet({ borderRadius: "30px" })} */
   }
   h2 {
-    font-family: "Lora", serif;
+    font-family: Georgia, "Times New Roman", Times, serif;
     font-style: normal;
     font-weight: 700;
     text-align: center;
@@ -118,7 +120,7 @@ function SinglePost() {
     <Wrapper>
       <div className="post">
         <h2>{post.title}</h2>
-        <h5>{moment(post.createdAt).format("DD MMMM, YYYY")}</h5>
+        <h5><span><i class="fa-solid fa-calendar"></i></span> {moment(post.createdAt).format("DD MMMM, YYYY")}</h5>
         <div className="author">
           <span>by {post.author}</span>
         </div>
@@ -153,10 +155,7 @@ function SinglePost() {
           </div>
         </div>
       </div>
-      <div className="related">
-        <h4 className="heading">More related posts from leadways blog</h4>
-        <RelatedPost id={id} />
-      </div>
+
     </Wrapper>
   );
 }

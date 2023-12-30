@@ -99,7 +99,7 @@ postRoute.put("/:id", upload.single("cover"), async (req, res) => {
     if (!title || !description) {
       res.status(400).json("all fields are required");
     }
-    if (req.file != null && !req.file.isEmpty()) {
+    if (req.file != null && req.file != "") {
       cover = req.file.path;
     }
 

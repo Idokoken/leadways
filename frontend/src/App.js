@@ -1,8 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import About from "./pages/About";
 import SinglePost from "./pages/SinglePost";
 import PostPage from "./pages/PostPage";
 import AdminPage from "./pages/admin/AdminPage";
@@ -11,15 +9,20 @@ import EditPostPage from "./pages/admin/EditPostPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ErrorPage from "./components/ErrorPage";
+import ScrollToTop from "./ScrollToTop";
+
 
 function App() {
+
+
   return (
+
     <Router>
+
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
         <Route path="/post/:id" element={<SinglePost />} />
         <Route path="/posts" element={<PostPage />} />
 
@@ -31,6 +34,8 @@ function App() {
       </Routes>
       <Footer />
     </Router>
+
+
   );
 }
 

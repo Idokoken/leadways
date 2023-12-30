@@ -34,12 +34,12 @@ const Wrapper = styled.div`
     margin: auto;
     /* border-radius: 20px; */
     ${Tablet({
-      width: "80%",
-      height: "60vh",
-      // borderRadius: "30px",
-    })}/* ${Desktop({
-      width: "70%",
-    })} */
+  width: "80%",
+  height: "60vh",
+  // borderRadius: "30px",
+})}/* ${Desktop({
+  width: "70%",
+})} */
   }
   .featured img {
     height: 100%;
@@ -70,14 +70,15 @@ const Wrapper = styled.div`
     padding: 20px;
     display: grid;
     grid-template-columns: 100%;
-    ${Tablet({ gridTemplateColumns: "50% 50%" })};
-    ${Desktop({ gridTemplateColumns: "40% 40%" })}
+    ${Tablet({ gridTemplateColumns: "45% 45%", paddingLeft: '40px' })};
+   
   }
   .others .post {
     margin-bottom: 30px;
     box-shadow: 0 5px 5px #888888;
     padding: 20px;
     ${Tablet({ marginRight: "40px" })}
+    ${Desktop({ marginRight: "50px" })}
   }
   .others h4 {
     font-family: "Noto Serif";
@@ -148,7 +149,7 @@ const Home = () => {
         <div className="container">
           <h3>{item.title.slice(0, 100)}</h3>
           <p
-            dangerouslySetInnerHTML={{ __html: item.description.slice(0, 100) }}
+            dangerouslySetInnerHTML={{ __html: item.description.slice(0, 150) }}
           />
         </div>
       </Link>
@@ -176,7 +177,7 @@ const Home = () => {
   return (
     <Wrapper>
       <h1>
-        Welcome to Leadways blog, your number one destination for latest news
+        Welcome to ExpertGuide Blog
       </h1>
 
       {featuredPost.length !== 0 && (

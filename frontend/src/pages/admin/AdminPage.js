@@ -12,10 +12,10 @@ const Wrapper = styled.div`
   font-family: "Poppins", sans-serif;
 
   .wel {
-    font-family: "Lato", san-serif;
-    font-style: italic;
+    font-family: Georgia, "Times New Roman", Times, serif;
     font-weight: 600;
-    font-size: 35px;
+    font-size: 25px;
+    ${Tablet({ fontSize: '35px' })}
   }
   h3 {
     color: var(--primary-color);
@@ -47,6 +47,18 @@ const Wrapper = styled.div`
     padding: 0;
     ${Tablet({ width: "40px", height: "40px" })}
   }
+
+  .next span,
+  .next button {
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+  .next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+  }
 `;
 
 function AdminPage() {
@@ -56,9 +68,18 @@ function AdminPage() {
   const message = location.state && location.state.message;
   const [posts, setPosts] = useState([]);
 
+  // for handling pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const postPerPage = 10;
+  // const totalPost = posts.length;
+
+  const startIndex = (currentPage - 1) * postPerPage;
+  const endIndex = startIndex + postPerPage;
+  const postsToDisplay = posts.slice(startIndex, endIndex);
+
   const getPosts = async () => {
     try {
-      const resp = await axios.get(`https://leadways.cyclic.app/post`);
+      const resp = await axios.get(`http://localhost:4000/post`);
       setPosts(resp.data);
       console.log(resp.data);
     } catch (error) {
@@ -74,18 +95,12 @@ function AdminPage() {
     try {
       await axios.delete(`${apiUrl}/post/${id}`);
       getPosts();
-      // if (resp.ok) {
-      //   // const updatedPost = posts.filter((post) => post._id !== id);
-      //   // setPosts(updatedPost);
-      // }
-
-      // navigate("/admin/okoro");
     } catch (err) {
       console.log(err);
     }
   };
 
-  const items = posts.map((post, i) => (
+  const items = postsToDisplay.map((post, i) => (
     <tr key={post._id}>
       <th scope="row">
         <img src={post.cover} alt="cover" />
@@ -107,7 +122,7 @@ function AdminPage() {
   return (
     <Wrapper>
       <div className="container adminpage mt-5">
-        <h4 className="text-bold text-center wel">
+        <h4 className="text-bold text-center wel m-1">
           Welcome to the admin dashboard
         </h4>
         <div className=" my-4 bg-secondary">
@@ -136,6 +151,43 @@ function AdminPage() {
               </thead>
               <tbody>{items}</tbody>
             </table>
+
+
+            <div className="next">
+              <nav aria-label="...">
+                <div></div>
+                <ul className="pagination">
+                  <li className="page-item">
+                    {currentPage !== 0 && currentPage !== 1 && (
+                      <button onClick={() => setCurrentPage(1)} className="page-link">
+                        First
+                      </button>
+                    )}
+                  </li>
+                  <li className="page-item">
+                    {currentPage > 1 && (
+                      <button
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                        className="page-link"
+                      >
+                        Previous
+                      </button>
+                    )}
+                  </li>
+
+                  <li className="page-item">
+                    {currentPage < Math.ceil(posts.length / postPerPage) && (
+                      <button
+                        className="page-link"
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                      >
+                        Next
+                      </button>
+                    )}
+                  </li>
+                </ul>
+              </nav>
+            </div>
           </>
         ) : (
           <h4>No post yet, Please add Posts or articles</h4>
