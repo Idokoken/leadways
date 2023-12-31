@@ -102,7 +102,7 @@ function Footer() {
           <p>
             ExpertGuide news-blog is your number one destination where you can read and learn latest and
             trending news about financial markets and other general information
-            making arounds the globe.
+            making rounds across the globe.
           </p>
         </div>
         <div className="item">
