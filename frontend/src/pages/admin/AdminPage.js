@@ -10,6 +10,8 @@ const Wrapper = styled.div`
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
+  max-width: 100vw; 
+  overflow-x: hidden;
 
   .wel {
     font-family: Georgia, "Times New Roman", Times, serif;
@@ -28,6 +30,7 @@ const Wrapper = styled.div`
   }
   table {
     font-size: 10px;
+    overflow-x: hidden;
     ${Tablet({ fontSize: "16px" })}
   }
   img {
@@ -68,7 +71,7 @@ function AdminPage() {
   const message = location.state && location.state.message;
   const [posts, setPosts] = useState([]);
 
-  // for handling pagination
+  // for handling paginationnp
   const [currentPage, setCurrentPage] = useState(1);
   const postPerPage = 10;
   // const totalPost = posts.length;
