@@ -71,7 +71,7 @@ function AdminPage() {
   const message = location.state && location.state.message;
   const [posts, setPosts] = useState([]);
 
-  // for handling paginationnp
+  // for handling pagination
   const [currentPage, setCurrentPage] = useState(1);
   const postPerPage = 10;
   // const totalPost = posts.length;
@@ -82,7 +82,7 @@ function AdminPage() {
 
   const getPosts = async () => {
     try {
-      const resp = await axios.get(`http://localhost:4000/post`);
+      const resp = await axios.get(`https://leadways.cyclic.app`);
       setPosts(resp.data);
       console.log(resp.data);
     } catch (error) {

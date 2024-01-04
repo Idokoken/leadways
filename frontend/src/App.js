@@ -26,7 +26,7 @@ function App() {
         <Route path="/post/:id" element={<SinglePost />} />
         <Route path="/posts" element={<PostPage />} />
 
-        <Route path="/okoro" element={<AdminPage />} />
+        <Route path="/admin/okoro" element={<AdminPage />} />
         <Route path="/addpost" element={<AddPostPage />} />
         <Route path="/editpost/:id" element={<EditPostPage />} />
 
