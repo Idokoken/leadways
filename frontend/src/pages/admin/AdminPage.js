@@ -82,7 +82,7 @@ function AdminPage() {
 
   const getPosts = async () => {
     try {
-      const resp = await axios.get(`https://leadways.cyclic.app`);
+      const resp = await axios.get(`https://leadways.cyclic.app/post`);
       setPosts(resp.data);
       console.log(resp.data);
     } catch (error) {
