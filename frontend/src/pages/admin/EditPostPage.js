@@ -125,7 +125,7 @@ function EditPostPage() {
     <Wrapper>
       <div className="container-fluid py-4 my-0">
         <div className="container">
-          <h1 className="text-darks">Add Post</h1>
+          <h1 className="text-darks">Edit Post</h1>
           <form onSubmit={handleSubmit}>
             {error !== "" && (
               <span className="alert alert-danger my-3 text-center">

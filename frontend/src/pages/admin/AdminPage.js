@@ -62,6 +62,33 @@ const Wrapper = styled.div`
     align-items: center;
     margin: 30px 0;
   }
+
+  .blog-profile{
+    display: grid;
+    grid-template-columns: 80%;
+    align-content: center;
+    gap: 30px;
+    margin: 30px 0;
+    justify-content: center;
+    ${Tablet({ gridTemplateColumns: '40% 40%', justifyContent: 'center' })}
+  }
+  .blog-profile .profile{
+      background: #CCC6C6;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 15px;
+  }
+  .blog-profile .profile h3{
+    color: black;
+    font-weight: 700;
+    font-size: 30px;
+  }
+  .blog-profile .profile p{
+    font-weight: 600;  
+  }
 `;
 
 function AdminPage() {
@@ -82,6 +109,7 @@ function AdminPage() {
 
   const getPosts = async () => {
     try {
+      // const resp = await axios.get(`http://localhost:4000/post`);
       const resp = await axios.get(`https://leadways.cyclic.app/post`);
       setPosts(resp.data);
       console.log(resp.data);
@@ -122,12 +150,24 @@ function AdminPage() {
       <td>{moment(post.createdAt).format("DD MMM YY")}</td>
     </tr>
   ));
+
   return (
     <Wrapper>
       <div className="container adminpage mt-5">
         <h4 className="text-bold text-center wel m-1">
-          Welcome to the admin dashboard
+          Admin dashboard
         </h4>
+        {message && <span className="alert alert-success">{message}</span>}
+        <div className="blog-profile">
+          <div className="profile">
+            <h3>{posts ? posts.length : 0}</h3>
+            <p>posts</p>
+          </div>
+          <div className="profile">
+            <h3>5</h3>
+            <p>People Visited</p>
+          </div>
+        </div>
         <div className=" my-4 bg-secondary">
           <div className="add">
             <Link to="/addpost" className="btn btn-primary m-2">
@@ -135,7 +175,7 @@ function AdminPage() {
             </Link>
           </div>
         </div>
-        {message && <span className="alert alert-success">{message}</span>}
+
         {posts.length !== 0 ? (
           <>
             <h3 className="my-4">News Posts</h3>

@@ -20,10 +20,14 @@ const Wrapper = styled.div`
 
 function PostPage() {
   return (
-    <Wrapper>
-      <h2>Posts from ExpertGuide blog</h2>
-      <Posts />
-    </Wrapper>
+    <>
+
+      <Wrapper>
+        <h2>Posts from ExpertGuide blog</h2>
+        <Posts />
+      </Wrapper>
+    </>
+
   );
 }
 

@@ -146,7 +146,7 @@ function Footer() {
       </div>
       <div className="rule">
         <p className="copywite">
-          All Right reversed &copy; ExpertGuide-Blog 2023{" "}
+          All Right reversed &copy; ExpertGuide-Blog 2024{" "}
         </p>
       </div>
     </Wrapper>

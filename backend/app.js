@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 const corsOptions = {
-  origin: "https://leadways.netlify.app",
+  origin: "https://expertguide.finance",
   optionsSuccessStatus: 200,
   methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
   Credential: true,

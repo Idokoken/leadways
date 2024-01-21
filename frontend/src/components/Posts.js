@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import { Tablet, Desktop } from "../Responsive";
+import ScrollToTop from "../ScrollToTop";
 
 const Wrapper = styled.div`
   margin: 0;
@@ -115,44 +116,48 @@ function Posts() {
   ));
 
   return (
-    <Wrapper>
-      <div className="post-container">{items}</div>
-      <div className="next">
-        <nav aria-label="...">
-          <div></div>
-          <ul className="pagination">
-            <li className="page-item">
-              {currentPage !== 0 && currentPage !== 1 && (
-                <button onClick={() => setCurrentPage(1)} className="page-link">
-                  First
-                </button>
-              )}
-            </li>
-            <li className="page-item">
-              {currentPage > 1 && (
-                <button
-                  onClick={() => setCurrentPage(currentPage - 1)}
-                  className="page-link"
-                >
-                  Previous
-                </button>
-              )}
-            </li>
+    <>
+      <ScrollToTop />
+      <Wrapper>
+        <div className="post-container">{items}</div>
+        <div className="next">
+          <nav aria-label="...">
+            <div></div>
+            <ul className="pagination">
+              <li className="page-item">
+                {currentPage !== 0 && currentPage !== 1 && (
+                  <button onClick={() => setCurrentPage(1)} className="page-link">
+                    First
+                  </button>
+                )}
+              </li>
+              <li className="page-item">
+                {currentPage > 1 && (
+                  <button
+                    onClick={() => setCurrentPage(currentPage - 1)}
+                    className="page-link"
+                  >
+                    Previous
+                  </button>
+                )}
+              </li>
 
-            <li className="page-item">
-              {currentPage < Math.ceil(posts.length / postPerPage) && (
-                <button
-                  className="page-link"
-                  onClick={() => setCurrentPage(currentPage + 1)}
-                >
-                  Next
-                </button>
-              )}
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </Wrapper>
+              <li className="page-item">
+                {currentPage < Math.ceil(posts.length / postPerPage) && (
+                  <button
+                    className="page-link"
+                    onClick={() => setCurrentPage(currentPage + 1)}
+                  >
+                    Next
+                  </button>
+                )}
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </Wrapper>
+    </>
+
   );
 }
 
