@@ -4,6 +4,8 @@ import axios from "axios";
 import styled from "styled-components";
 import { Tablet, Desktop } from "../Responsive";
 import ScrollToTop from "../ScrollToTop";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Wrapper = styled.div`
   margin: 0;
@@ -17,6 +19,13 @@ const Wrapper = styled.div`
     padding: 20px;
     ${Tablet({ gridTemplateColumns: "40% 40%", gap: "50px", paddingLeft: '40px' })}
     ${Desktop({ gridTemplateColumns: "30% 30% 30%", gap: "50px" })}
+  }
+  .post-skeleton{
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 10px;
+    ${Tablet({ gridTemplateColumns: "40% 40%", gap: "50px", })}
+    ${Desktop({ gridTemplateColumns: "40% 40%", gap: "50px" })}
   }
 
   .post {
@@ -66,8 +75,22 @@ const Wrapper = styled.div`
   }
 `;
 
+const Loading = () => {
+  return (
+    <div className="post-skeleton">
+      <div className="">
+        <Skeleton height={150} />
+      </div>
+      <div className="" >
+        <Skeleton height={150} />
+      </div>
+    </div>
+  );
+};
+
 function Posts() {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -83,8 +106,10 @@ function Posts() {
   useEffect(() => {
     const getPosts = async () => {
       try {
+        setLoading(true);
         const resp = await axios.get(`${apiUrl}/post`);
         setPosts(resp.data);
+        setLoading(false);
         console.log(resp.data);
       } catch (error) {
         console.log(error);
@@ -119,7 +144,7 @@ function Posts() {
     <>
       <ScrollToTop />
       <Wrapper>
-        <div className="post-container">{items}</div>
+        <div className="post-container">{loading ? <Loading /> : items}</div>
         <div className="next">
           <nav aria-label="...">
             <div></div>

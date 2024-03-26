@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import NewsLetter from "../components/NewsLetter";
 import { Tablet } from "../Responsive";
 
 class About extends Component {
@@ -57,68 +56,87 @@ class About extends Component {
         font-size: 18px;
       }
     `;
+
     return (
       <Wrapper>
         <div className="about container py-3 py-3">
-          <h3 className="my-3">What Leadways Stands For</h3>
+          <h3 className="my-3">About Us</h3>
           <p style={{ textIndent: "30px" }}>
-            Leadways blog, registered on September 1, 2023, commenced online
-            publication on October 10, 2023.
+            At Expertguide, we are passionate about bringing you the latest news, insights, and analysis from
+            the dynamic world of cryptocurrencies and blockchain technology. As a leading source of information
+            in the crypto space, our mission is to empower our readers with knowledge to navigate the
+            ever-evolving landscape of digital assets.
           </p>
           <p style={{ textIndent: "30px" }}>
-            The Leadways is an independent online news blog,for the purpose of
-            presenting balanced coverage of events, and of promoting the best
-            interests of the People. It owes allegiance to no political party,
-            ethnic community, religious, Country or other interest group. Its
-            primary commitment is to the integrity and truth, and beyond that to
-            the unity of world. Leadways blog is a liberal online blog,
-            committed to the best traditions and ideals of democracy. It
-            believes that it is the responsibility of the state not only to
-            protect and defend the citizen, but also to create the conditions,
-            political, social, economic and cultural, in which all citizens may
-            achieve their highest potential as human beings. It is committed to
-            the principle of individual freedom, but believes that all citizens
-            have duties as well as rights. . Leadways will at all times uphold
-            the need for justice, probity in public life, equal access to the
-            nation’s resources, and equal protection for all citizens.
+            Expertguide is your premier destination for all things cryptocurrency and
+            blockchain-related news. At Expertguide, we provide you with accurate,
+            timely, and insightful information to navigate the dynamic world of digital currencies and
+            decentralized technologies.
+          </p>
+          <p>
+            Founded by a team of seasoned professionals with extensive experience in finance, technology, and
+            blockchain, Expertguide is driven by a commitment to providing accurate, unbiased, and
+            comprehensive coverage of the cryptocurrency industry. Whether you're a seasoned investor, a
+            curious newcomer, or a blockchain enthusiast, our platform caters for all levels of expertise.
+          </p>
+          <p>
+            What sets Expertguide apart is our dedication to delivering high-quality content that goes beyond the
+            headlines. From in-depth market analysis and investment strategies to interviews with industry experts
+            and explorations of emerging blockchain trends, we strive to offer valuable insights that enable our
+            readers to make informed decisions in the fast-paced world of crypto.
+          </p>
+          <p>
+            At Expertguide, we believe in the transformative potential of blockchain technology to
+            revolutionize industries, redefine financial systems, and empower individuals worldwide. Through
+            our platform, we aim to foster a vibrant community of crypto enthusiasts, investors, developers,
+            and thought leaders who share our vision for a decentralized future.
           </p>
           <h3>Vision</h3>
           <p>
-            To be among Nigeria’s first truly Independent national quality and
+            To be among the world's platform for truly Independent quality cryptocurrency
             news website.
           </p>
           <h3>Mission</h3>
           <p>
-            To produce quality, vibrant and viable news that wills inform and
-            form the nation’s present and aspiring political, business, economic
-            and cultural leadership; challenge and inspire the nation’s
-            journalists to advance and defend the public good; and deliver
-            superior value to all stakeholders.
+            Our mission at Expertguide is to empower our readers with the knowledge and resources they
+            need to understand, engage with, and thrive in the rapidly evolving landscape of cryptocurrencies.
+            We believe that education is the key to unlocking the full potential of blockchain technology and
+            its transformative impact on finance, technology, and society as a whole.
           </p>
-          <h3>Editorial Policy</h3>
+          <h3>What We Offer</h3>
           <p>
-            Our Editorial Policy, as set out by the Board of Directors, was
-            founded on the following principle: We shall be independent on all
-            matters, but shall never be neutral on any matter, especially those
-            concerning the well-being of the Nigerian people.
+            Through our carefully curated articles, analysis, guides, and news updates, we aim to keep you
+            informed about the latest developments, trends, and innovations in the crypto space. Whether
+            you're a seasoned investor, a blockchain enthusiast, or just getting started, we have something
+            for everyone
           </p>
 
-          <h3>Editorial Team</h3>
+          <h3>Why Choose Us</h3>
           <p>
-            Romanus Eze, Stanley Mike, Hon. Kingsley metu, Onyekach Henry,
-            Ibrahim magu, Jonathan Udom.
+            At Expertguide, we pride ourselves on delivering high-quality content that is both informative
+            and accessible. Our team of experienced writers and researchers are deeply immersed in the world of
+            cryptocurrency and blockchain technology, ensuring that you receive reliable insights and expert
+            analysis you can trust.
+          </p>
+          <h3>Stay Connected</h3>
+          <p>
+            Stay updated with the latest news, analysis, and insights by
+            following us on social media. Join us on this exciting journey as we explore the endless
+            possibilities of cryptocurrency and blockchain technology together.
+          </p>
+          <p>
+            Join us on our journey as we explore the exciting possibilities of cryptocurrency and blockchain
+            technology. Whether you're here to stay updated on the latest news, deepen your understanding of
+            blockchain fundamentals, or discover new investment opportunities, Expertguide is your trusted
+            companion in the world of digital assets. Welcome aboard!
+          </p>
+          <p>
+            Thank you for choosing Expertguide as your trusted source for cryptocurrency news and information.
+            We look forward to serving you and being a part of your crypto journey.
           </p>
 
-          <div className="categories">
-            <h3>Our News Categories includes</h3>
-            <p>Politics</p>
-            <p>Entertainment</p>
-            <p>Art</p>
-            <p>Technology</p>
-            <p>Sport</p>
-          </div>
         </div>
-        <NewsLetter />
+
       </Wrapper>
     );
   }

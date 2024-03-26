@@ -4,7 +4,8 @@ import axios from "axios";
 import styled from "styled-components";
 import { Desktop, Tablet } from "../Responsive";
 import moment from "moment";
-
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Wrapper = styled.div`
   padding: 0;
@@ -29,8 +30,8 @@ const Wrapper = styled.div`
     background-color: grey;
     height: 40vh;
     /* border-radius: 20px; */
-    ${Tablet({ width: "90%", height: "50vh" })}
-    ${Desktop({ width: "90%", height: "60vh" })}
+    ${Tablet({ width: "90%", height: "60vh" })}
+    ${Desktop({ width: "90%", height: "70vh" })}
   }
   .post img {
     width: 100%;
@@ -97,8 +98,19 @@ const Wrapper = styled.div`
   }
 `;
 
+const Loading = () => {
+  return (
+    <div className="post">
+      <div className="px-3">
+        <Skeleton height={350} />
+      </div>
+    </div>
+  );
+};
+
 function SinglePost() {
   const [post, setPost] = useState({});
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const postUrl = window.location.href;
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -106,8 +118,10 @@ function SinglePost() {
   useEffect(() => {
     const getPost = async () => {
       try {
+        setLoading(true);
         const resp = await axios.get(`${apiUrl}/post/${id}`);
         setPost(resp.data);
+        setLoading(false);
         console.log(resp.data);
       } catch (error) {
         console.log(error);
@@ -118,44 +132,46 @@ function SinglePost() {
 
   return (
     <Wrapper>
-      <div className="post">
-        <h2>{post.title}</h2>
-        <h5><span><i class="fa-solid fa-calendar"></i></span> {moment(post.createdAt).format("DD MMMM, YYYY")}</h5>
-        <div className="author">
-          <span>by {post.author}</span>
-        </div>
-        <div className="img-container">
-          <img src={post.cover} alt="post cover" />
-        </div>
-        <div className="content">
-          <p dangerouslySetInnerHTML={{ __html: post.description }} />
-          <div className="social my-4">
-            <h4 className="mb-3">Share on</h4>
-            <Link
-              to={`https://twitter.com/intent/tweet?url=${postUrl}`}
-              target="_blank"
-            >
-              <img src="/images/twitter.png" alt="twitter" />
-            </Link>
-            <Link
-              to={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`}
-              target="_blank"
-            >
-              <img src="/images/facebook.png" alt="facebook" />
-            </Link>
-            <Link
-              to={`https://www.linkedin.com/shareArticle?url=${postUrl}`}
-              target="_blank"
-            >
-              <img src="/images/linkedin.png" alt="linkedIn" />
-            </Link>
-            <Link to={`whatsapp://send?text=${postUrl}`} target="_blank">
-              <img src="/images/whatsapp.png" alt="whatsapp" />
-            </Link>
+      {loading ?
+        Loading :
+        <div className="post">
+          <h2>{post.title}</h2>
+          <h5><span><i class="fa-solid fa-calendar"></i></span> {moment(post.createdAt).format("DD MMMM, YYYY")}</h5>
+          <div className="author">
+            <span>by {post.author}</span>
+          </div>
+          <div className="img-container">
+            <img src={post.cover} alt="post cover" />
+          </div>
+          <div className="content">
+            <p dangerouslySetInnerHTML={{ __html: post.description }} />
+            <div className="social my-4">
+              <h4 className="mb-3">Share on</h4>
+              <Link
+                to={`https://twitter.com/intent/tweet?url=${postUrl}`}
+                target="_blank"
+              >
+                <img src="/images/twitter.png" alt="twitter" />
+              </Link>
+              <Link
+                to={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`}
+                target="_blank"
+              >
+                <img src="/images/facebook.png" alt="facebook" />
+              </Link>
+              <Link
+                to={`https://www.linkedin.com/shareArticle?url=${postUrl}`}
+                target="_blank"
+              >
+                <img src="/images/linkedin.png" alt="linkedIn" />
+              </Link>
+              <Link to={`whatsapp://send?text=${postUrl}`} target="_blank">
+                <img src="/images/whatsapp.png" alt="whatsapp" />
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-
+      }
     </Wrapper>
   );
 }

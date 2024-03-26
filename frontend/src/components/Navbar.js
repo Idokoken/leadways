@@ -65,6 +65,11 @@ function Navbar({ user }) {
                   All Posts
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/about">
+                  About Us
+                </NavLink>
+              </li>
 
             </ul>
           </div>

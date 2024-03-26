@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ErrorPage from "./components/ErrorPage";
 import ScrollToTop from "./ScrollToTop";
+import About from "./pages/About";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/post/:id" element={<SinglePost />} />
         <Route path="/posts" element={<PostPage />} />
+        <Route path="/about" element={<About />} />
 
         <Route path="/admin/okoro" element={<AdminPage />} />
         <Route path="/addpost" element={<AddPostPage />} />

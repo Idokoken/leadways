@@ -113,6 +113,9 @@ function Footer() {
           <p>
             <Link to="/posts">Posts</Link>
           </p>
+          <p>
+            <Link to="/about">About Us</Link>
+          </p>
 
         </div>
         <div className="item">

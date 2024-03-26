@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { Tablet, Desktop } from "../Responsive";
+
 
 const Wrapper = styled.div`
   min-height: 50vh;
@@ -108,17 +111,44 @@ const Wrapper = styled.div`
   }
 `;
 
+const Loading1 = () => {
+  return (
+    <div className="featured">
+      <div className="px-3">
+        <Skeleton height={350} />
+      </div>
+    </div>
+  );
+};
+
+const Loading2 = () => {
+  return (
+    <div className="others">
+      <div className="me-md-2">
+        <Skeleton height={150} />
+      </div>
+      <div className="">
+        <Skeleton height={150} />
+      </div>
+    </div>
+  );
+};
+
+
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [featuredPost, setFeaturedPost] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const getfeaturedPosts = async () => {
       try {
+        setLoading(true);
         const resp = await axios.get(`${apiUrl}/post/featured`);
         setFeaturedPost(resp.data);
+        setLoading(false);
         console.log(resp.data);
       } catch (error) {
         console.log(error);
@@ -126,9 +156,11 @@ const Home = () => {
     };
     const getLatestPosts = async () => {
       try {
+        setLoading(true);
         const resp = await axios.get(`${apiUrl}/post/latest`);
         setPosts(resp.data);
         console.log(resp.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -180,21 +212,25 @@ const Home = () => {
         Welcome to ExpertGuide Blog
       </h1>
 
-      {featuredPost.length !== 0 && (
-        <>
-          <h2 className="">Trending news</h2>
-          <div className="featured">{featuredItems}</div>
-        </>
-      )}
-      {posts.length !== 0 && (
-        <>
-          <h2>Latest news</h2>
-          <div className="others">{otherItems}</div>
-          <div className="more">
-            <Link to="/posts">More News</Link>
-          </div>
-        </>
-      )}
+      {loading ? <Loading1 /> :
+        featuredPost.length !== 0 && (
+          <>
+            <h2 className="">Trending news</h2>
+            <div className="featured">{featuredItems}</div>
+          </>
+        )
+      }
+      {loading ? <Loading2 /> :
+        posts.length !== 0 && (
+          <>
+            <h2>Latest news</h2>
+            <div className="others">{otherItems}</div>
+            <div className="more">
+              <Link to="/posts">More News</Link>
+            </div>
+          </>
+        )
+      }
     </Wrapper>
   );
 };
